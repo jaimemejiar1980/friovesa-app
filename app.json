@@ -1,0 +1,77 @@
+{
+  "expo": {
+    "name": "Friovesa",
+    "slug": "friovesa",
+    "scheme": "friovesa",
+    "version": "4.5.6",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "usesAppleSignIn": true,
+      "supportsTablet": true,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.friovesa.store",
+      "buildNumber": "3050"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.friovesa.store",
+      "versionCode": 3046
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/Roboto-Regular.ttf",
+            "./src/assets/fonts/Raleway-Regular.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.4"
+          }
+        }
+      ],
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "Friovesa puede necesitar acceso a su ubicación precisa en futuras actualizaciones para ofrecerle servicios personalizados basados en su ubicación."
+        }
+      ],
+      ["expo-apple-authentication"]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "67712ed2-909e-4604-afdf-830038311159"
+      }
+    }
+  }
+}
