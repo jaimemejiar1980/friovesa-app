@@ -45,6 +45,7 @@ interface OrderFormatter {
   customerId: any
   settings: any
   cupon: any
+  afiliado: any
 }
 
 export class OrderRequestFormatter {
@@ -58,6 +59,7 @@ export class OrderRequestFormatter {
   products: any
   order: any
   cupon: any
+  afiliado: any
 
   constructor({
     shippingZone,
@@ -68,12 +70,14 @@ export class OrderRequestFormatter {
     customerId,
     settings,
     cupon,
+    afiliado,
   }: OrderFormatter) {
     this.shippingZone = shippingZone;
     this.billing = billing;
     this.shipping = shipping;
     this.products = cart;
     this.cupon = cupon;
+    this.afiliado = afiliado;
 
     const formattedLineItems = this.formatOrderLineItems();
 
@@ -108,6 +112,7 @@ export class OrderRequestFormatter {
         store: settings.store?.toUpperCase(), // define the city to handle events in Friovesa Mobile Api plugin
       },
       cupon,
+      afiliado,
     };
   }
 

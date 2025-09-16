@@ -18,9 +18,13 @@ export function CartProvider({ children }) {
   } = useCartReducer();
 
   const [cupon, setCupon] = useState("");
+  const [afiliado, setAfiliado] = useState("");
 
   const updateCupon = (value) => {
     setCupon(value);
+  };
+  const updateAfiliado = (value) => {
+    setAfiliado(value);
   };
 
   return (
@@ -39,6 +43,8 @@ export function CartProvider({ children }) {
         total,
         cupon,
         updateCupon,
+        afiliado,
+        updateAfiliado
       }}
     >
       {children}
