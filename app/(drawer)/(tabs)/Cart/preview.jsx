@@ -18,18 +18,16 @@ import { useState, useEffect } from "react";
 import { errorToast, successToast } from "../../../../src/lib/Toast";
 
 export default function Preview({ handleBack, handleNext }) {
-  const { cart, total, cupon, updateCupon} = useCart();
+  const { cart, total, cupon, updateCupon, afiliado, updateAfiliado} = useCart();
   const { shippingZone } = useCheckout();
   const { showLoadingModal, hideLoadingModal } = useGlobalLoadingModal();
   //const [ cupon, setCupon ] = useState("");
   const [ descuento, setDescuento ] = useState(0);
   const [ totalSum, setTotalSum ] = useState(0);
+  const [ afiliados, setAfiliados ] = useState([]);
+  //const [ selectedAfiliado, setSelectedAfiliado] = useState(null);
 
-  const options = [
-    { value: '1', label: 'Mario Pineda' },
-    { value: '2', label: 'Juan Aguirre' },
-  ];
-
+  
   const applyClick = async (e) => {
     if(descuento != 0){
       successToast({
@@ -98,19 +96,25 @@ export default function Preview({ handleBack, handleNext }) {
     }, 3000);
     return;
   };
-
+  
   useEffect(() => {
     const totalP = sumMoneyList([total, shippingZone?.costPerOrder]).substring(1);
     setTotalSum(totalP);
-    //updateCupon("#paymon8zt");
+    const getAfiliados = async () =>{
+      const response = await apiPrivate.get(API.AFFILIATES.GET_ALL.URL);
+      //console.log(response.data);
+      setAfiliados(response.data);  
+    }
+    getAfiliados();
+    
   }, []); 
 
   const styles = StyleSheet.create({
     dropdownButtonStyle: {
-      width: 200,
-      height: 50,
+      width: '100%',
+      height: 40,
       backgroundColor: '#E9ECEF',
-      borderRadius: 12,
+      borderRadius: 10,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
@@ -200,55 +204,56 @@ export default function Preview({ handleBack, handleNext }) {
               </Text>
             </View>
             <View className="w-full pt-3 flex flex-wrap flex-row justify-between">
-                  <Text className="text-copy-light text-lg">
-                    Cupón de descuento
-                  </Text>
-                </View>
-                <View className="w-full mb-5 flex flex-wrap flex-row justify-between">
-                  <TextInput
-                    className="border border-border rounded-md w-[60%]"
-                    style={{ height: 40, borderColor: 'gray' }}
-                    value={cupon}
-                    onChangeText={newText => updateCupon(newText)}
-                    autoCapitalize="none"
-                    placeholder="Ingresa tu cupón"
-                  />
-                  <TouchableOpacity
-                    className=" rounded-md border border-gray-300 bg-success w-[30%]"
-                    onPress={applyClick}
-                  >
-                    <Text className="text-center text-base text-white pt-2">Aplicar</Text>
-                  </TouchableOpacity>
-                </View>
-            <View className="w-full pt-3 flex flex-wrap flex-row justify-between">
+              <Text className="text-copy-light text-lg">
+                Cupón de descuento
+              </Text>
+            </View>
+            <View className="w-full mb-1 flex flex-wrap flex-row justify-between">
+              <TextInput
+                className="border border-border rounded-md w-[60%]"
+                style={{ height: 40, borderColor: 'gray' }}
+                value={cupon}
+                onChangeText={newText => updateCupon(newText)}
+                autoCapitalize="none"
+                placeholder="Ingresa tu cupón"
+              />
+              <TouchableOpacity
+                className=" rounded-md border border-gray-300 bg-success w-[30%]"
+                onPress={applyClick}
+              >
+                <Text className="text-center text-base text-white pt-2">Aplicar</Text>
+              </TouchableOpacity>
+            </View>
+            <View className="w-full flex flex-wrap flex-row justify-between">
               <Text className="text-copy-light text-lg">
                 Referido
               </Text>
             </View>
-            <View className="w-full flex flex-wrap flex-row justify-between">
-            <SelectDropdown
-                data={options}
-                onSelect={(selectedItem, index) => {
-                  console.log(selectedItem, index);
-                }}
-                renderButton={(selectedItem, isOpened) => {
-                  return (
-                    <View style={styles.dropdownButtonStyle}>
-                      <Text style={styles.dropdownButtonTxtStyle}>
-                        {(selectedItem && selectedItem.label) || 'Selecciona un referido'}
-                      </Text>
-                    </View>
-                  );
-                }}
-                renderItem={(item, index, isSelected) => {
-                  return (
-                    <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
-                      <Text style={styles.dropdownItemTxtStyle}>{item.label}</Text>
-                    </View>
-                  );
-                }}
-                showsVerticalScrollIndicator={false}
-                dropdownStyle={styles.dropdownMenuStyle}
+            <View className="w-full flex flex-wrap flex-row justify-betweern">
+              <SelectDropdown
+                  data={afiliados}
+                  defaultButtonText="Seleccione una opción"
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem.affiliate_id);
+                    updateAfiliado(selectedItem.affiliate_id);
+                  }}
+                  renderButton={(selectedItem, isOpened) => {
+                    return (
+                      <View style={styles.dropdownButtonStyle} >
+                        <Text style={styles.dropdownButtonTxtStyle}>
+                          {(selectedItem && selectedItem.name) || 'Selecciona un referido'}
+                        </Text>
+                      </View>
+                    );
+                  }}
+                  renderItem={(item, index, isSelected) => {
+                    return (
+                      <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
+                        <Text style={styles.dropdownItemTxtStyle}>{item.name}</Text>
+                      </View>
+                    );
+                  }}
+                  showsVerticalScrollIndicator={false}
               />
             </View>
           </View>

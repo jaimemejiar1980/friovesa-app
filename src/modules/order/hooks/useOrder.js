@@ -20,6 +20,7 @@ export default function useOrder() {
     customerId,
     settings,
     cupon,
+    afiliado,
   }) => {
     setIsLoading(true);
     setIsError(false);
@@ -36,6 +37,7 @@ export default function useOrder() {
           store: settings.store,
         },
         cupon,
+        afiliado,
       });
 
       const paymentMethodId = paymentMethod.id;

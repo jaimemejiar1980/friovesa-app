@@ -5,6 +5,7 @@ import {
 import { gyeFlagIcon, uioFlagIcon } from "../../../src/constants/icons";
 import { HOME_CAROUSEL } from "../../../src/constants/imagesCarousel";
 import { HomeServices, useCarouselImages } from "../../../src/modules/home";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ImageCarousel,
   CustomSafeAreaView,
@@ -56,7 +57,10 @@ export default function Home() {
                 <TouchableCity
                   cityTitle={lang.uioCity}
                   cityIcon={uioFlagIcon}
-                  handlePress={() => router.push("(tabs)/Uio")}
+                  handlePress={
+                    async () => {router.push("(tabs)/Uio");
+                      await AsyncStorage.setItem("store", "Uio");
+                    }}
                 />
               </View>
 
@@ -64,7 +68,10 @@ export default function Home() {
                 <TouchableCity
                   cityTitle={lang.gyeCity}
                   cityIcon={gyeFlagIcon}
-                  handlePress={() => router.push("(tabs)/Gye")}
+                  handlePress={
+                    async () => {router.push("(tabs)/Gye");
+                      await AsyncStorage.setItem("store", "Gye");
+                    }}
                 />
               </View>
             </View>

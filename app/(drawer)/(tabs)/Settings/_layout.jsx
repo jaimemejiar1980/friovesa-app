@@ -19,6 +19,12 @@ export default function SettingsLayout() {
           }}
         />
         <Stack.Screen
+          name="affiliate"
+          options={{
+            header: (props) => <TabsHeader title="" />,
+          }}
+        />
+        <Stack.Screen
           name="aboutUs"
           options={{
             header: (props) => <TabsHeader title="" />,

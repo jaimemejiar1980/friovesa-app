@@ -175,6 +175,7 @@ export default {
   termsAndConditions: "Términos & Condiciones",
   privacyPolicy: "Política de Privacidad",
   aboutUs: "Sobre Nosotros",
+  affiliate: "Afiliados",
   deleteAccount: "Borrar cuenta",
 
   and: "y",

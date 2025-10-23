@@ -18,11 +18,13 @@ export function AppAvailabilityNotificationProvider({ children }) {
         setIsLoading(true);
 
         let info = null;
+        
         if (isIos) {
           info = await notificationService.getIosAppAvailability();
         } else {
           info = await notificationService.getAndroidAppAvailability();
         }
+        
 
         setAppAvailabilityInfo(info);
 

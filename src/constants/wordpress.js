@@ -75,6 +75,14 @@ export const API = {
       URL: `${API_URL}/wp-json/wc/v3/coupons`,
     },
   },
+  AFFILIATES: {
+    GET_ALL: {
+      URL: `${PLUGIN_URL}/v4/affiliates`,
+    },
+    IS_AFFILIATE: {
+      URL: `${PLUGIN_URL}/v4/is_affiliates`,
+    },
+  },
   CUSTOMER_ORDERS: {
     URL: `${API_URL}/wp-json/wc/v3/orders`,
     RESULTS_PER_PAGE: 10,

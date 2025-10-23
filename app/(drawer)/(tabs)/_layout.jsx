@@ -5,16 +5,22 @@ import {
   TabBarIcon,
   TabBarIconCart,
   TabBarIconLabel,
+  TouchableSettings,
 } from "../../../src/modules/common";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import {
   uioIcon,
   gyeIcon,
   homeIcon,
   cartIcon,
   userIcon,
+  clockIcon,
+  searchIcon,
 } from "../../../src/constants/icons";
 import lang from "../../../src/lang/es";
+import { useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TouchableOpacity } from "react-native";
 
 export default function TabLayout() {
   const iosTabBarStyle = {
@@ -27,6 +33,7 @@ export default function TabLayout() {
   };
 
   const isIos = Platform.OS === "ios";
+  
 
   return (
     <>
@@ -54,7 +61,26 @@ export default function TabLayout() {
           options={{
             title: "",
             tabBarIcon: ({ color }) => (
-              <TabBarIconLabel icon={uioIcon} title={lang.uio} color={color} />
+              <TabBarIcon icon={uioIcon} color={color} />
+            ),
+            tabBarButton: () => null,
+          }} 
+        />
+        <Tabs.Screen
+            name="Gye"
+            options={{
+              tabBarIcon: ({ color }) => (
+                <TabBarIcon icon={gyeIcon} color={color} />
+              ),
+              tabBarButton: () => null,
+          }} 
+        />
+        <Tabs.Screen
+          name="Stores/index" 
+          options={{
+            title: "",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon icon={searchIcon}  color={color} />
             ),
           }}
         />
@@ -66,11 +92,11 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="Gye"
+          name="Historial/index" 
           options={{
             title: "",
             tabBarIcon: ({ color }) => (
-              <TabBarIconLabel icon={gyeIcon} title={lang.gye} color={color} />
+              <TabBarIcon icon={clockIcon}  color={color} />
             ),
           }}
         />
@@ -83,6 +109,7 @@ export default function TabLayout() {
             ),
           }}
         />
+        
       </Tabs>
 
       <StatusBar style="light" />

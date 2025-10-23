@@ -15,6 +15,8 @@ import { createContext } from "react";
  * @property {string} total - The total price of the products in the cart.
  * @property {string} cupon - The coupon apply.
  * @property {function} updateCupon - Add a product to the cart.
+ * @property {string} afiliado - The coupon apply.
+ * @property {function} updateAfiliado - Add a product to the cart.
  */
 
 /**

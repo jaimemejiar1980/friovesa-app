@@ -23,7 +23,7 @@ import lang from "../../../../src/lang/es";
 
 export default function Payment({ handleBack, handleNext }) {
   const { showLoadingModal, hideLoadingModal } = useGlobalLoadingModal();
-  const { cart, cityName, cupon } = useCart();
+  const { cart, cityName, cupon, afiliado } = useCart();
   const { user } = useAuth();
   const {
     isLoading: isPaymentMethodsLoading,
@@ -43,7 +43,7 @@ export default function Payment({ handleBack, handleNext }) {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    console.log(cupon);
+    console.log(afiliado);
     if (paymentMethods) {
       onchangePaymentMethod(paymentMethods[0]);
     }
@@ -92,6 +92,7 @@ export default function Payment({ handleBack, handleNext }) {
         store: cityName,
       },
       cupon,
+      afiliado
     });
     hideLoadingModal();
   };
