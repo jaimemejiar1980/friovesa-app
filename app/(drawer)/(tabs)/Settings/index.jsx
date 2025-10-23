@@ -64,6 +64,10 @@ export default function index() {
     router.push("(drawer)/(tabs)/Settings/aboutUs");
   };
 
+  const handleAffiliate = () => {
+    router.push("(drawer)/(tabs)/Settings/affiliate");
+  };
+
   const handleTerms = () => {
     router.push("(drawer)/(tabs)/Settings/termsAndConditions");
   };
@@ -132,6 +136,10 @@ export default function index() {
     return false;
   };
 
+  useEffect(() => {
+    console.log(user);
+  }, []);
+ 
   return (
     <CustomSafeAreaView>
       <ScrollView className="px-4 py-3">
@@ -216,6 +224,11 @@ export default function index() {
                   icon={infoIcon}
                   handlePress={handleAboutUs}
                 />
+                <TouchableSettings
+                  title={lang?.affiliate}
+                  icon={infoIcon}
+                  handlePress={handleAffiliate}
+                />
 
                 <TouchableSettings
                   title={lang?.deleteAccount}
@@ -225,6 +238,7 @@ export default function index() {
                   isEnd={true}
                   handlePress={handleOpenDeleteModal}
                 />
+                
 
                 <View className="pt-5">
                   <Text className="text-copy-light text-base text-right">

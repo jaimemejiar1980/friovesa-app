@@ -69,6 +69,10 @@ export default function CustomDrawerMenu(props) {
     setOpenModal(true);
   };
 
+  const handleAffiliate = () => {
+    router.navigate("(drawer)/(tabs)/Settings/affiliate");
+  };
+
   const handleOrdersHistory = () => {
     /**
      * If the current screen is "ordersHistory", close the Drawer without navigating.
@@ -121,6 +125,12 @@ export default function CustomDrawerMenu(props) {
         icon={userIcon}
       />
 
+      <DrawerItemWithIcon
+        label={lang?.affiliate}
+        onPress={handleAffiliate}
+        icon={userIcon}
+      />
+      
       <DrawerItemWithIcon
         label={lang?.logout}
         onPress={handleOpenLogoutModal}
